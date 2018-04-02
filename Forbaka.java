@@ -13,6 +13,7 @@ public class Forbaka{
 	
 	public static void main(String[] fucking){
 		
+		// *-- FLOP --* //
 		Scanner sc = new Scanner(System.in);
 		
 		Deck deck = new Deck();
@@ -35,7 +36,7 @@ public class Forbaka{
 		
 		AllHands allHandsFlop = new AllHands(deck); // All Pocket 2-card Hands
 		
-		List<List<String>> everyFuckingCombinations = new ArrayList<>(); // All (Pocket + Flop) 5-card Hands
+		List<List<String>> everyFuckingCombinationsFLOP = new ArrayList<>(); // All (Pocket + Flop) 5-card Hands
 		
 		for(List<String> hand: allHandsFlop.getAllHands()){
 			List<String> omaha = new ArrayList<>();
@@ -47,9 +48,53 @@ public class Forbaka{
 				omaha.add(handcard);
 			}
 			
-			everyFuckingCombinations.add(omaha);
+			everyFuckingCombinationsFLOP.add(omaha);
 		}
 		
+		printPossibleHands(everyFuckingCombinationsFLOP);
+		
+		
+		// *-- TURN --* //
+		Scanner sc2 = new Scanner(System.in);
+		String turnCard = sc2.next();
+		
+		List<String> turn = flop;
+		turn.add(turnCard);
+		deck.removeCards(turnCard);
+		
+			System.out.println("");
+			System.out.println("");
+		System.out.println("// FLOP + TURN:");
+		System.out.println(turn);
+			System.out.println("");
+			System.out.println("");
+		
+		AllHands allHandsTurn = new AllHands(deck);
+		
+		List<List<String>> everyFuckingCombinationsTURN = new ArrayList<>();
+		
+		for(List<String> hand: allHandsTurn.getAllHands()){
+			List<String> omaha = new ArrayList<>();
+			
+			for(String card: turn){
+				omaha.add(card);
+			}			
+			for(String card: hand){
+				omaha.add(card);
+			}
+			
+			everyFuckingCombinationsTURN.add(omaha);
+		}
+		
+		printPossibleHands(everyFuckingCombinationsTURN);
+		
+		
+		// *-- RIVER --* //
+		Scanner sc3 = new Scanner(System.in);
+		
+	}
+	
+	public static void printPossibleHands(List<List<String>> everyFuckingCombinations){
 		Set<List<String>> listOfStraightFlushHands = new HashSet<>();
 		Set<List<String>> listOf4KindHands = new HashSet<>();
 		Set<List<String>> listOfFullHouseHands = new HashSet<>();
@@ -289,5 +334,8 @@ public class Forbaka{
 		for(List<String> hand : listOf1PairHands){
 			System.out.println(hand);
 		}
+		
+		System.out.println("");
+		System.out.println("");
 	}
 }
